@@ -163,19 +163,22 @@ class Admin::ResourceController < AdminController
       # TODO getting controller name from url
       case action
       when 'new'
-        request.fullpath.gsub('admin/', '').gsub("/#{action}", '')
+        request.fullpath.gsub("#{non_model_namespace}/", '').gsub("/#{action}", '')
       when 'show'
-        request.fullpath.gsub('admin/', '').split('/').reverse.drop(1).reverse.join('/')
+        request.fullpath.gsub("#{non_model_namespace}/", '').split('/').reverse.drop(1).reverse.join('/')
       when 'update'
-        request.fullpath.gsub('admin/', '').split('/').reverse.drop(1).reverse.join('/')
+        request.fullpath.gsub("#{non_model_namespace}/", '').split('/').reverse.drop(1).reverse.join('/')
       when 'destroy'
-        request.fullpath.gsub('admin/', '').split('/').reverse.drop(1).reverse.join('/')
+        request.fullpath.gsub("#{non_model_namespace}/", '').split('/').reverse.drop(1).reverse.join('/')
       when 'edit'
-        request.fullpath.gsub('admin/', '').gsub("/#{action}", '').split('/').reverse.drop(1).reverse.join('/')
+        request.fullpath.gsub("#{non_model_namespace}/", '').gsub("/#{action}", '').split('/').reverse.drop(1).reverse.join('/')
       else
-        request.fullpath.gsub('admin/', '').gsub("/#{action}", '')
+        request.fullpath.gsub("#{non_model_namespace}/", '').gsub("/#{action}", '')
       end
+    end
 
+    def non_model_namespace
+      'admin'
     end
 
     def load_resource
@@ -287,26 +290,26 @@ class Admin::ResourceController < AdminController
 
     def new_object_url(options = {})
       if parent_data.present?
-        new_polymorphic_url([:admin, parent, model_class], options)
+        new_polymorphic_url([non_model_namespace.to_sym, parent, model_class], options)
       else
-        new_polymorphic_url([:admin, model_class], options)
+        new_polymorphic_url([non_model_namespace.to_sym, model_class], options)
       end
     end
 
     def edit_object_url(object, options = {})
       if parent_data.present?
-        send "edit_admin_#{model_name}_#{object_name}_url", parent, object, options
+        send "edit_#{non_model_namespace}_#{model_name}_#{object_name}_url", parent, object, options
       else
-        send "edit_admin_#{object_name}_url", object, options
+        send "edit_#{non_model_namespace}_#{object_name}_url", object, options
       end
     end
 
     def object_url(object = nil, options = {})
       target = object ? object : @object
       if parent_data.present?
-        send "admin_#{model_name}_#{object_name}_url", parent, target, options
+        send "#{non_model_namespace}_#{model_name}_#{object_name}_url", parent, target, options
       else
-        send "admin_#{object_name}_url", target, options
+        send "#{non_model_namespace}_#{object_name}_url", target, options
       end
     end
 
