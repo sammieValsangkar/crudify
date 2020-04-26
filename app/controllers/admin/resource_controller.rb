@@ -142,7 +142,6 @@ class Admin::ResourceController < AdminController
     end
 
     def model_class
-      "#{controller_name_with_namespace.singularize.classify}"
       "#{controller_name_with_namespace.singularize.classify}".constantize
     end
 
@@ -168,6 +167,8 @@ class Admin::ResourceController < AdminController
       when 'show'
         request.fullpath.gsub('admin/', '').split('/').reverse.drop(1).reverse.join('/')
       when 'update'
+        request.fullpath.gsub('admin/', '').split('/').reverse.drop(1).reverse.join('/')
+      when 'destroy'
         request.fullpath.gsub('admin/', '').split('/').reverse.drop(1).reverse.join('/')
       when 'edit'
         request.fullpath.gsub('admin/', '').gsub("/#{action}", '').split('/').reverse.drop(1).reverse.join('/')
