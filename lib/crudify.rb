@@ -1,9 +1,11 @@
 require "crudify/engine"
+require 'responders'
+require "ransack"
+require 'kaminari'
 
 module Crudify
   # Your code goes here...
 end
-
 
 ActiveRecord::Base.class_eval do
   def self.foreign_key?(key)

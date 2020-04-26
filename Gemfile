@@ -13,5 +13,6 @@ gemspec
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
-# gem 'responders'
-# gem 'ransack', '1.8.7'
+gem 'responders'
+gem 'ransack', '~> 2.1'
+gem 'kaminari'
