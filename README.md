@@ -8,17 +8,12 @@ How to use my plugin.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'crudify'
+gem 'crudify', github: 'sammieValsangkar/crudify'
 ```
 
 And then execute:
 ```bash
 $ bundle
-```
-
-Or install it yourself as:
-```bash
-$ gem install crudify
 ```
 
 ## Contributing
