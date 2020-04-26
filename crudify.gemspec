@@ -7,11 +7,11 @@ require "crudify/version"
 Gem::Specification.new do |spec|
   spec.name        = "crudify"
   spec.version     = Crudify::VERSION
-  spec.authors     = ["sammyValsangkar"]
-  spec.email       = ["sameer@cart91.com"]
-  # spec.homepage    = "TODO"
-  spec.summary     = "Summary of Crudify."
-  spec.description = "Description of Crudify."
+  spec.authors     = ["sammieValsangkar"]
+  spec.email       = ["sameervalsangkar3@gmail.com"]
+  spec.homepage    = "https://github.com/sammieValsangkar/crudify"
+  spec.summary     = "Rails Dynamic CRUD Generator"
+  spec.description = "Generates CRUD UI at run time. using simple configuration"
   spec.license     = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
