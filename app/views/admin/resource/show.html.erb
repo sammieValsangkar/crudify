@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-md-12">
+    <h3> <%= @object.class.table_name.titleize %> Details</h3>
+    <% @object.class.columns_hash.each do |attrib, data_info| %>
+      <p class="text-capitalize">
+        <strong><%= "#{attrib}".titleize %>:</strong>
+          <% if data_info.type.to_s == 'text' %>
+            <%= @object.send(attrib) %>
+          <% elsif data_info.type.to_s == 'datetime' %>
+            <%= l_datetime @object.send(attrib) %>
+          <% elsif data_info.type.to_s == 'integer' %>
+            <% if @object.class.foreign_key?(attrib) %>
+              <%= display_dynamic_relation(@object, attrib) %>
+            <% else %>
+            <%= @object.send(attrib) %>
+            <% end %>
+          <% else %>
+            <%= @object.send(attrib) %>
+          <% end %>
+      </p>
+    <% end %>
+    <%= link_to t('admin.link.edit'), send("edit_admin_#{@object.class.table_name.singularize}_path", @object) %> |
+    <%= link_to t('admin.link.back'), send("admin_#{@object.class.table_name}_path") %>
+  </div>
+</div>

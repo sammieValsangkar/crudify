@@ -1,0 +1,91 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>
+          <%= t('admin.model.header', value: "Visa Type masters") %><small><%= t('admin.model.header', value: "add/edit Visa Type here") %></small>
+        </h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Settings 1</a>
+              </li>
+              <li><a href="#">Settings 2</a>
+              </li>
+            </ul>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <br>
+        <%= form_for([:admin, @object], html: {class: "form-horizontal form-label-left"}) do |f| %>
+            <%= render 'error_messages', object: f.object %>
+
+
+            <% @object.class.columns_hash.reject{|k,v| ['id', 'created_at', 'updated_at'].include?(k) }.each do |attrib, data_info| %>
+
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                  <%= "#{attrib}".titleize %>
+                  <% if presence_validator_present?(@object.class, attrib) %>
+                    <span class="required">*</span>
+                  <% end %>
+
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <% if data_info.type.to_s == 'text' %>
+                    <%= f.text_area :"#{attrib}", class: "form-control col-md-7 col-xs-12", rows: 4, required: presence_validator_present?(@object.class, attrib) %>
+                  <% elsif data_info.type.to_s == 'datetime' %>
+                    <%= f.text_field :"#{attrib}", class: "form-control col-md-7 col-xs-12 dyn-datetimepicker", rows: 4, value: l_datetime(@object.send(attrib), required: presence_validator_present?(@object.class, attrib)) %>
+                  <% elsif data_info.type.to_s == 'boolean' %>
+                    <label class="radio-inline">
+                      <%=f.radio_button :"#{attrib}",true %>
+                      <%= f.label :"#{attrib}", "Yes",value:"true" %>
+                    </label>
+                    <label class="radio-inline">
+                      <%=f.radio_button :"#{attrib}",false %>
+                      <%= f.label :"#{attrib}", "No",value:"false" %>
+                    </label>
+                  <% elsif data_info.type.to_s == 'integer' %>
+                    <% if @object.class.foreign_key?(attrib) %>
+                      <%= f.select(:"#{attrib}", options_for_select(
+                        dropdown_options_for_foreign_key(@object.class, attrib), selected: @object.send(attrib)),{include_blank: "Select #{@object.class.foreign_klass_for attrib}".titleize}, { class: 'form-control col-md-7 col-xs-12 select2_single', required: presence_validator_present?(@object.class, attrib)})  %>
+                    <% else %>
+                      <%= f.text_field :"#{attrib}", class: "form-control col-md-7 col-xs-12", required: presence_validator_present?(@object.class, attrib) %>
+                    <% end %>
+                  <% else %>
+                      <%= f.text_field :"#{attrib}", class: "form-control col-md-7 col-xs-12", required: presence_validator_present?(@object.class, attrib) %>
+                  <% end %>
+                </div>
+              </div>
+
+            <% end %>
+
+
+            <div class="form-group">
+              <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <a href="/admin/visa/visa_types" class="btn btn-primary"><%= t('admin.button.cancel') %></a>
+                <%= f.submit t('admin.button.submit'), class: "btn btn-success" %>
+              </div>
+            </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$( document ).ready(function() {
+  $('.dyn-datetimepicker').datetimepicker({
+    format: 'DD/MM/YYYY hh:mm:ss A',
+  });
+});
+
+
+</script>

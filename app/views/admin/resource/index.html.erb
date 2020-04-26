@@ -1,0 +1,110 @@
+<h1>
+  Listing <%= @klass.table_name.titleize %></h3>
+</h1>
+<div class="row">
+  <div class="col-md-12">
+    <div class="add-visa-type">
+      <%= link_to "Listing #{@klass.table_name.titleize}", send("new_admin_#{@klass.table_name.singularize}_path"), class: "btn btn-success",style: "margin-bottom:20px;" %>
+    </div>
+    <div class="show-continents">
+      <div class="search-form">
+        <div class="well">
+          <%= search_form_for [:admin, @search], class: 'form-inline' do |f| %>
+              <%- locals = {:f => f} %>
+              <div class="form-group">
+                <% @klass.columns_hash.reject{|k,v| ['id', 'created_at', 'updated_at'].include?(k) }.each_with_index do | (attrib, data_info), idx| %>
+                  <div class="col-sm-4 form-group">
+                    <% if data_info.type.to_s == 'text' %>
+                      <%= f.text_field :"#{attrib}_cont_any", class: 'form-control', placeholder: attrib.titleize  %>
+                    <% elsif data_info.type.to_s == 'datetime' %>
+                      <%= f.text_field :"#{attrib}_cont_any", class: 'form-control', placeholder: 'Visa Type' %>
+                    <% elsif data_info.type.to_s == 'integer' %>
+                      <% if @klass.foreign_key?(attrib) %>
+                        <%= f.select(:"#{attrib}_eq", options_for_select(
+                          dropdown_options_for_foreign_key(@klass, attrib), selected: @search.send(:"#{attrib}_eq") ),{include_blank: "Select #{@klass.foreign_klass_for attrib}".titleize}, { class: 'form-control', style: {width: '100% !important'} })  %>
+                      <% else %>
+                        <%= f.text_field :"#{attrib}_cont_any", class: 'form-control', placeholder: 'Visa Type' %>
+                      <% end %>
+                    <% elsif data_info.type.to_s == 'boolean' %>
+                        <%= f.select(:"#{attrib}_eq", options_for_select(
+                          [['Yes', true], ['No', false]], selected: @search.send(:"#{attrib}_cont") ),{include_blank: "Select #{attrib}".titleize}, { class: 'form-control', style: {width: '100% !important'} })  %>
+                    <% else %>
+                        <%= f.text_field :"#{attrib}_cont_any", class: 'form-control', placeholder: attrib.titleize %>
+                    <% end %>
+                  </div>
+                  <% if ((idx+1)%3) == 0 %>
+                    <div class="clearfix"></div>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="form-group">
+                <%= button_to t('admin.button.search'), 'search', class: 'btn btn-sm btn-primary space-bottom-5px not-cleared' %>
+
+                <button type="button" class="btn btn-sm btn-info space-bottom-5px clear-all-form-inputs">Clear</button>
+              </div>
+            <% end %>
+        </div>
+      </div>
+      <%if @collection.empty? %>
+        <%= t('admin.empty.message', type: @klass.table_name.titleize) %>
+        <% else %>
+          <% colums = @klass.columns_hash.keys %>
+          <div class="x_content">
+            <table class="table">
+              <thead>
+                <tr>
+                  <% colums.each do |attrib| %>
+                    <th><%= t('admin.table',head: "#{attrib}".titleize) %></th>
+                  <% end %>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @collection.each do |object| %>
+                  <tr>
+                    <% colums.each do |attrib| %>
+                      <td>
+                        <% next unless object.send(attrib) %>
+
+                        <% data_info = @klass.columns_hash[attrib] %>
+                        <% if data_info.type.to_s == 'text' %>
+                          <%= object.send(attrib)[0..10] %>
+                        <% elsif data_info.type.to_s == 'datetime' %>
+                          <%= l_datetime object.send(attrib) %>
+                        <% elsif data_info.type.to_s == 'integer' %>
+                          <% if object.class.foreign_key?(attrib) %>
+                            <%= display_dynamic_relation(object, attrib) %>
+                          <% else %>
+                          <%= object.send(attrib) %>
+                          <% end %>
+                        <% else %>
+                          <%= object.send(attrib) %>
+                        <% end %>
+                      </td>
+                    <% end %>
+                    <td>
+
+                      <%= link_to t('admin.link.edit'), send("edit_admin_#{@klass.table_name.singularize}_path", object), class: 'btn btn-xs btn-info' %>
+                      <%= link_to t('admin.link.show'), send("admin_#{@klass.table_name.singularize}_path", object), class: 'btn btn-xs btn-warning' %>
+                      <%= link_to t('admin.link.delete'), send("admin_#{@klass.table_name.singularize}_path", object), method: :delete, data: { confirm: t('admin.message.confirm_delete') }, class: 'btn btn-xs btn-danger' %>
+                      </td>
+
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%= paginate @collection %>
+<style type="text/css">
+  @media (min-width: 768px){
+    .form-inline .form-control {
+        display: inline-block;
+        width: 100%;
+        vertical-align: middle;
+    }
+  }
+</style>
