@@ -1,0 +1,125 @@
+
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  admin:
+    table: '%{head}'
+    sort:
+      sort_by: 'Sort'
+      asc: 'Ascending'
+      desc: 'Descending'
+    button:
+      name: '%{ name }'
+      submit: 'Submit'
+      cancel: 'Cancel'
+      search: 'Search'
+      edit: 'Edit'
+      show: 'Show'
+      back: 'Back'
+      save: 'Save'
+      previous: 'Previous'
+      save_and_continue: 'Save and Continue'
+      next: 'Next'
+      save_next: 'Save & next'
+      clear: 'Clear'
+      reset: 'Reset'
+      delete_selected_service: 'Delete Selected Service'
+      select_vendor: 'Select Vendor'
+      delete: 'Delete'
+      view: 'View'
+      update: 'Update'
+      show_status: 'Show Status'
+      update_all_and_continue: 'Update All Traveler Details And Continue'
+      save_and_next: 'Save And Next'
+
+    link:
+      title: '%{title}'
+      edit: 'Edit'
+      show: 'Show'
+      back: 'Back'
+      delete: 'Delete'
+      new_record: 'Add %{model}'
+    message:
+      confirm_delete: 'Are you sure ?'
+      empty: 'No %{model} added yet'
+      prompt: 'Select %{model}'
+      record_unique: 'Must be unique'
+    active:
+      yes: 'yes'
+      no: 'no'
+    blacklisted:
+      yes: 'yes'
+      no: 'no'
+    laminated:
+      yes: 'yes'
+      no: 'no'
+    primary:
+      yes: 'yes'
+      no: 'no'
+    model:
+      list: '%{name} List'
+      listing: '%{name} Inquiry Listing'
+      header: '%{value}'
+      create: '%{model} is created successfully'
+      fail: '%{model} creation failed'
+      destroy: '%{model} is destroyed successfully'
+      update: '%{model} is successfully updated'
+      country: 'Country'
+      tax: 'Tax'
+      invoice: 'Invoice'
+      proforma: 'Proforma'
+      payment_mode: 'Payment Mode'
+      appointments: 'Appointment'
+      payment_approval_request: 'Payment Approval Request'
+      currency: 'Currency'
+      customer_source_group: 'CustomerSourceGroup'
+      refund: 'Refund'
+      close: 'Close'
+    info:
+      not_set: 'Not Set'
+      not_applicable: 'NA'
+      other_group: 'Other Permissions'
+    error:
+      not_found: 'No record found'
+    roles:
+      no_permission: 'No permission added yet'
+    actions:
+      add_new: 'Add New %{model}'
+      edit: 'Edit'
+      show: 'Show'
+      update: 'Updated'
+      delete: 'Delete'
+      search: 'Search'
+      submit: 'Submit'
+      cancel: 'Cancel'
+      back: 'Back'
+      add_refund: 'Add Refund'
+    listing: '%{model} listing'
+    masters: '%{model} Masters'
+    add_edit: 'Add/Edit %{model} here'
+    attribute:
+      name: 'Name'
+      email: 'Email'
+      phone: 'Phone'
+      country: 'Country'
+      tax_type: 'Tax type'
+      tax_group: 'Tax Group'
