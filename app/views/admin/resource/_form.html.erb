@@ -20,7 +20,7 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <% if data_info.type.to_s == 'text' %>
                     <%= f.text_area :"#{attrib}", class: "form-control col-md-7 col-xs-12", rows: 4, required: presence_validator_present?(@object.class, attrib) %>
-                  <% elsif data_info.type.to_s == 'datetime' %>
+                  <% elsif data_info.type.to_s == 'datetime' || data_info.type.to_s == 'date' %>
                     <%= f.text_field :"#{attrib}", class: "form-control col-md-7 col-xs-12 dyn-datetimepicker", rows: 4, value: l_datetime(@object.send(attrib), required: presence_validator_present?(@object.class, attrib)) %>
                   <% elsif data_info.type.to_s == 'boolean' %>
                     <label class="radio-inline">
