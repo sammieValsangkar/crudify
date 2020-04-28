@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-md-12">
-    <h3> Edit <%= @object.class.table_name.titleize %></h3>
-    <%# link_to t('admin.link.show'), admin_object_path(@object) %> |
-    <%# link_to t('admin.link.back'), admin_visa_visa_types_path %>
+    <h3> Edit <%= @object.class.name.titleize %></h3>
+    <%= link_to t('admin.link.show'), send("admin_#{@object.class.table_name.singularize}_path", @object) %> |
+    <%= link_to t('admin.link.back'), send("admin_#{@object.class.table_name}_path") %>
   </div>
   <%= render 'form',object: @object %>
 
