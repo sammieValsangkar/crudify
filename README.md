@@ -1,5 +1,5 @@
 # Crudify
-Crudify enables the creation of Dynamic CRUD actions. All CRUD actions are being handled with this gem also provides Index powered by ransack.
+Crudify enables the creation of Dynamic CRUD actions. All CRUD actions are handled by this gem. This also provides Index powered by ransack.
 
 ## Installation
 Add this line to your application's Gemfile:
