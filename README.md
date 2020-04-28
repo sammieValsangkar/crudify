@@ -23,7 +23,7 @@ namespace :admin do
   resources :your_resource_name, controller: '/admin/resource'
 end
 ```
-And there you go.
+And here you go.
 
 It will create form according to datatypes and associations declared in model.
 e.g.
@@ -37,9 +37,5 @@ It will generate dropdown to select the value. also provides dropdown to filter 
   
   2. All resources must be in admin namespace. we have not added any authentication for an admin. You can write your own             AdminController.
   
-
-## Contributing
-Contribution directions go here.
-
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
