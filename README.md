@@ -32,11 +32,10 @@ It will generate dropdown to select the value. also provides dropdown to filter 
 
 2. For boolean attributes It will generate Radio button in form
 
-
-
-
-
-
+Note:
+  You need Bootstrap 3 for to get better UI. soon we will add support for Bootstrap 4.
+  All resources must be in admin namespace. we have not added any authentication for an admin. You can write your own             AdminController
+  
 
 ## Contributing
 Contribution directions go here.
