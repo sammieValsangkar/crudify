@@ -27,7 +27,7 @@ And here you go.
 
 It will create form according to datatypes and associations declared in model.
 e.g.
-1. If you declare belongs_to assocotation in your model.
+1. If you declare belongs_to association in your model.
 It will generate dropdown to select the value. also provides dropdown to filter at index page.
 
 2. For boolean attributes It will generate Radio button in form
