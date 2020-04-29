@@ -32,6 +32,9 @@ It will generate dropdown to select the value. also provides dropdown to filter 
 
 2. For boolean attributes It will generate Radio button in form
 
+3. It will add client side validation if validation declared in model.
+
+
 ### Note:
   1. You need Bootstrap 3 for to get better UI. soon we will add support for Bootstrap 4.
   
